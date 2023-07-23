@@ -17,6 +17,15 @@
     margin-top: 45px;
     grid-column: 1 / span 4;
     height: 75px;
+    border: none;
+    font-size: 2rem;
+    color: white;
+    text-align: right;
+    padding: 20px;
+    font-weight: 700;
+}
+.display-box:hover{
+    background-color: hsl(50, 22, 27);
 }
 
 .span2 {
@@ -31,16 +40,34 @@ button {
     background-color: #9C9AB3;
     color: #FFFFFF;
     font-size: 1.7rem;
+    font-weight: bolder;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+.calculate {
+    background-color: #62C987;
 }
 
+button:hover {
+    background-color: #6F6E7F;
+}
+
+button.calculate:hover {
+    background-color: #4A9666;
+}
 @media screen and (max-width: 768px) {
     body {
         background-color: #F4F3FE;
     }
+
+    .calculator{
+        grid-template-columns: repeat(4,58px);
+    }
+    
 }
 
 @media screen and (max-width: 991px) {
     .calculator-bg{
         width: 65%;
     }
+    
 }
