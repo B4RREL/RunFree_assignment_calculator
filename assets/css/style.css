@@ -61,6 +61,7 @@ button.calculate:hover {
 
     .calculator{
         grid-template-columns: repeat(4,58px);
+        
     }
     
 }

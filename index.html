@@ -13,31 +13,175 @@
         <div class="row justify-content-center">
             <div class="calculator-bg col-6 col-md-12">
                 <div class="calculator">
-                    <input type="text" value="220+220" class="display-box" readonly>
+                    <input type="text" id="displayBox" value="0" class="display-box" readonly>
     
                     </input>
-                    <button class="span2">AC</button>
-                    <button>+</button>
-                    <button>-</button>
-                    <button>9</button>
-                    <button>8</button>
-                    <button>7</button>
-                    <button>*</button>
-                    <button>6</button>
-                    <button>5</button>
-                    <button>4</button>
-                    <button>÷</button>
-                    <button>3</button>
-                    <button>2</button>
-                    <button>1</button>
-                    <button>%</button>
-                    <button>0</button>
-                    <button>.</button>
-                    <button class="span2 calculate">=</button>
+                    <button class="span2" onclick="allClear()">AC</button>
+                    <button onclick="deleteOne()">DE</button>
+                    <button onclick="input('+')">+</button>
+                    <button onclick="input(9)">9</button>
+                    <button onclick="input(8)">8</button>
+                    <button onclick="input(7)">7</button>
+                    <button onclick="input('-')">-</button> 
+                    <button onclick="input(6)">6</button>
+                    <button onclick="input(5)">5</button>
+                    <button onclick="input(4)">4</button>
+                    <button onclick="input('*')">×</button>
+                    <button onclick="input(3)">3</button>
+                    <button onclick="input(2)">2</button>
+                    <button onclick="input(1)">1</button>
+                    <button onclick="input('/')">÷</button>
+                    <button onclick="input(0)">0</button>
+                    <button onclick="input('.')" id="dot">.</button>
+                    <button class="span2 calculate" onclick="result()">=</button>
                 </div>
             </div>
         </div>
     </div>
 </body>
+<script>
+    const displayBox = document.getElementById("displayBox");
+    let isDot = false;
+    console.log(9/3)
+    function allClear() {
+        input('c')
+    }
+
+    function input(value) {
+        if(value == "c"){
+            displayBox.value = 0;
+        } else {
+            if(value == '*'){
+                value = '×';
+                isDot = false;
+            }
+            if(value == '/'){
+                value = '÷';
+                isDot = false;
+            }
+            if(value == '+'){
+                isDot = false;
+            }
+            if(value == '-'){
+                isDot = false;
+            }
+            if(value == '.'){
+                if(isDot){
+                    value = '';
+                }
+                 isDot = true;
+            }
+            displayBox.value = displayBox.value==0 ? value : displayBox.value += value;
+        }
+    }
+
+    function deleteOne() {
+        let de = displayBox.value.slice(0, -1);
+        displayBox.value = de;
+        if(displayBox.value == ""){
+            displayBox.value = 0;
+        }
+    }
+
+    function result() {
+        let inputArray = displayBox.value.split("");
+        var result = 0;
+        var stringoutput = "";
+        var sign = "";
+        var firstNum = 0;
+        // console.log(inputArray);
+        for(const input of inputArray){
+            console.log(input);
+            switch (input) {
+                case '+':
+                        if(stringoutput){
+                             firstNum = parseFloat(stringoutput);
+                            stringoutput = "";
+                            if(sign){
+                                result = calculate(result,firstNum,sign)
+                            } else {
+                                result = firstNum;
+                            }
+                        }
+                        sign = "+";
+                    break;
+                case '-':
+                        if(stringoutput){
+                             firstNum = parseFloat(stringoutput);
+                            stringoutput = "";
+                            if(sign){
+                                result = calculate(result,firstNum,sign)
+                            } else {
+                                result = firstNum;
+                            }
+                        }
+                        sign = "-";
+                    break;
+                case '×':
+                        if(stringoutput){
+                             firstNum = parseFloat(stringoutput);
+                            stringoutput = "";
+                            if(sign){
+                                result = calculate(result,firstNum,sign)
+                            } else {
+                                result = firstNum;
+                            }
+                        }
+                        sign = "*";
+                    break;
+                case '÷':
+                        if(stringoutput){
+                             firstNum = parseFloat(stringoutput);
+                            stringoutput = "";
+                            if(sign){
+                                result = calculate(result,firstNum,sign)
+                            } else {
+                                result = firstNum;
+                            }
+                        }
+                        sign = "/";
+                    break;
+                default:
+                    stringoutput += input
+                    break;
+            }
+        }
+
+        if(stringoutput){
+             firstNum = parseFloat(stringoutput);
+            stringoutput = "";
+             if(sign){
+                result = calculate(result,firstNum,sign)
+             } else {
+                result = firstNum;
+             }
+        }
+        displayBox.value = result;
+
+    }
+
+    function calculate(firstNumber,secNumber,operator){
+    let result;
+    switch(operator)
+    {
+        case "+": result = firstNumber + secNumber ;
+        break;
+
+        case "-" : result = firstNumber - secNumber;
+        break;
+
+        case "*" :result = firstNumber * secNumber;
+        break;
+
+        case "/" : result = firstNumber / secNumber;
+        break;
+
+        default : 
+        break;
+    }
+    return result;
+}
+    
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </html>
